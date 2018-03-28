@@ -5,7 +5,11 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour {
 
 	Rigidbody2D body;
+	public GameObject bulletPrefab;
 	public float speed;
+
+	Vector2 positionOnScreen;
+	Vector2 mouseOnScreen;
 
 	// Use this for initialization
 	void Start () {
@@ -15,10 +19,10 @@ public class PlayerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Get the Screen positions of the player
-		Vector2 positionOnScreen = Camera.main.WorldToViewportPoint (transform.position);
+		positionOnScreen = Camera.main.WorldToViewportPoint (transform.position);
 
 		//Get the Screen position of the mouse
-		Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
+		mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
 		//Get the angle between the points
 		float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
@@ -35,6 +39,10 @@ public class PlayerScript : MonoBehaviour {
 		//Store the current vertical input in the float moveVertical.
 		float moveVertical = Input.GetAxis ("Vertical");
 
+		if (Input.GetMouseButtonDown(0) == true) {
+			Fire();
+		}
+
 		//Use the two store floats to create a new Vector2 variable movement.
 		Vector2 movement = new Vector2 (moveHorizontal * speed * 0.1f, moveVertical * speed * 0.1f);
 
@@ -44,6 +52,22 @@ public class PlayerScript : MonoBehaviour {
 
 	float AngleBetweenTwoPoints(Vector3 a, Vector3 b) {
 		return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
+	}
+
+	void Fire() {
+		// Create the Bullet
+		var bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+
+		float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
+
+		//bullet.transform.rotation = Quaternion.Euler(new Vector3(0f,0f,angle));
+
+		// Add velocity to the bullet
+
+		var rad = angle * Mathf.Deg2Rad;
+
+		bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
+
 	}
 		
 }
