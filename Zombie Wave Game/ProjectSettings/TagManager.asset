@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Zombie
   layers:
   - Default
   - TransparentFX
@@ -13,8 +14,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Projectiles
+  - Zombies
   - 
   - 
   - 
@@ -40,6 +41,9 @@ TagManager:
   m_SortingLayers:
   - name: WallsAndFloor
     uniqueID: 2278175581
+    locked: 0
+  - name: Projectiles
+    uniqueID: 1150120175
     locked: 0
   - name: Default
     uniqueID: 0
