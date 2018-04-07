@@ -12,7 +12,7 @@ public class MusicSwitch : MonoBehaviour {
     {
         musicSwitcher = FindObjectOfType<MusicPlayer>(); //used to tie the level music gameobject to a variable so it can be utilized in the script
 
-        if (SoundTrack != null) //basoc exception handling to ensure that music is only loaded if it exists
+        if (SoundTrack != null) //basic exception handling to ensure that music is only loaded if it exists
         {
             musicSwitcher.ChangeTrack(SoundTrack); //Calls the confirm script's change track method to change current song
         }
