@@ -23,6 +23,7 @@ public class GameLogic : MonoBehaviour {
 		if (zombiesLeft <= 0) {
 			wave++;
 			zombiesLeft = Mathf.CeilToInt(Mathf.Sqrt (wave)) * 10;
+			maxZombies = 5 + wave;
 		}
 			
 	}

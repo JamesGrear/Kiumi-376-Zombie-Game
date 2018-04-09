@@ -14,6 +14,7 @@ public class ZombieScript : MonoBehaviour {
 	PathfindGrid pathfindingGrid;
 	List<Point> path;
 	GameLogic gameLogic;
+	Animator animator;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +23,7 @@ public class ZombieScript : MonoBehaviour {
 		targetPlayer = GameObject.FindGameObjectWithTag ("Player");
 		walls = GameObject.FindGameObjectWithTag ("WallsTilemap").GetComponent<Tilemap>();
 		gameLogic = GameObject.FindObjectOfType<GameLogic> ();
+		animator = GetComponent<Animator> ();
 
 		BoundsInt bounds = walls.cellBounds;
 		Tile[] allTiles = walls.GetTiles<Tile> ();
@@ -51,6 +53,35 @@ public class ZombieScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		// EXIT IF DEAD!
+		if (health <= 0)
+			return;
+
+		// move along path
+		if (path != null && path [0].x % 1 == 0 & path [0].y % 1 == 0) {
+			float step = speed * Time.deltaTime;
+			BoundsInt bounds = walls.cellBounds;
+			Vector3 start = walls.CellToWorld (new Vector3Int (path [0].x + bounds.min.x, path [0].y + bounds.min.y, 1));
+			start = start + new Vector3 (0.5f, 0.5f);
+
+			transform.position = Vector3.MoveTowards (transform.position, start, step);
+		}
+			
+		//Get the angle between the player and zombie
+		float angle = AngleBetweenTwoPoints(targetPlayer.transform.position, transform.position);
+
+		float dist = Vector3.Distance(targetPlayer.transform.position, transform.position);
+
+		if (dist < 1) {
+			animator.Play ("Zombie_Grabbing");
+		} else {
+			animator.Play ("Zombie_Walking");
+		}
+
+
+		transform.rotation = Quaternion.Euler (new Vector3(0f,0f,angle-90));
+
+		// debug code for pathfinding
 		/*if (path.Count <= 0) {
 			Debug.Log ("No path found.");
 		} else {
@@ -59,15 +90,6 @@ public class ZombieScript : MonoBehaviour {
 				Debug.Log (path [i].x + ", " + path[i].y);
 			}
 		}*/
-
-
-		// move along path
-		float step = speed * Time.deltaTime;
-		BoundsInt bounds = walls.cellBounds;
-		Vector3 start = walls.CellToWorld(new Vector3Int(path[0].x + bounds.min.x, path[0].y + bounds.min.y, 1));
-		start = start + new Vector3 (0.5f, 0.5f);
-
-		transform.position = Vector3.MoveTowards(transform.position, start, step);
 			
 	}
 
@@ -114,8 +136,16 @@ public class ZombieScript : MonoBehaviour {
 		health -= damage;
 
 		if (health <= 0) {
-			DestroyObject (gameObject);
+			animator.Play ("Zombie_Death");
+			Destroy (GetComponent<Rigidbody2D>());
+			Destroy (GetComponent<Collider2D> ());
+			GetComponent<SpriteRenderer> ().sortingLayerName = "Dead";
+			DestroyObject (gameObject, 0.83f);
 			gameLogic.zombiesLeft--;
 		}
+	}
+
+	float AngleBetweenTwoPoints(Vector3 a, Vector3 b) {
+		return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
 	}
 }

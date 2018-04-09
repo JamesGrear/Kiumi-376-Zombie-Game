@@ -44,6 +44,9 @@ TagManager:
   - name: WallsAndFloor
     uniqueID: 2278175581
     locked: 0
+  - name: Dead
+    uniqueID: 200815099
+    locked: 0
   - name: Projectiles
     uniqueID: 1150120175
     locked: 0

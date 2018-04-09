@@ -366,11 +366,6 @@ Prefab:
       propertyPath: targetPlayer
       value: 
       objectReference: {fileID: 395319848}
-    - target: {fileID: 114903906881109018, guid: caf810b580e9f4f859ee6e5a2d73a42a,
-        type: 2}
-      propertyPath: speed
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: caf810b580e9f4f859ee6e5a2d73a42a, type: 2}
   m_IsPrefabParent: 0
@@ -896,7 +891,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2016791715
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_MaxChunkCount: 16
