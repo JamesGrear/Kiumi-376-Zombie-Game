@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicInstantiator : MonoBehaviour {
+public class MusicInstantiator : MonoBehaviour
+{
 
     public static MusicInstantiator instance; //implementation of a singleton instance for the sound
 
@@ -18,5 +19,19 @@ public class MusicInstantiator : MonoBehaviour {
         {
             Destroy(gameObject); //if a duplicate of the gameObject is found then destroy it
         }
+    }
+
+    public void Initializer()
+    {
+        //sets player prefs which will be useful when controlling the audio
+        if (PlayerPrefs.GetInt("mutestate", 0) == 0) 
+        {
+            PlayerPrefs.SetInt("mutestate", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("mutestate", 0);
+        }
+
     }
 }
