@@ -8,6 +8,7 @@ public class MenuTransitions : MonoBehaviour {
     //panel located within main menu that allows player to exit game
     public GameObject exitpanel;
     public GameObject pausepanel;
+    public GameObject retrypanel;
 
 
      void Update()
@@ -29,6 +30,12 @@ public class MenuTransitions : MonoBehaviour {
     public void PlayGameBtn()
     {
         SceneManager.LoadScene(1); 
+    }
+
+    public void RetryGameBtn()
+    {
+        SceneManager.LoadScene(1);
+        retrypanel.SetActive(false);
     }
 
     public void SettingsGameBtn()

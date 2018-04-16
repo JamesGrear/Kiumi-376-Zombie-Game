@@ -289,6 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exitpanel: {fileID: 0}
   pausepanel: {fileID: 0}
+  retrypanel: {fileID: 0}
 --- !u!114 &163691134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1051,7 +1052,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &1587308970
 GameObject:
   m_ObjectHideFlags: 0
@@ -1346,4 +1347,4 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_IsOn: 1
+  m_IsOn: 0
