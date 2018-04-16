@@ -8,6 +8,8 @@ public class PlayerScript : MonoBehaviour {
 	public GameObject bulletPrefab;
 	public float speed;
 
+	float moveHorizontal;
+	float moveVertical;
 	Vector2 positionOnScreen;
 	Vector2 mouseOnScreen;
 
@@ -34,10 +36,10 @@ public class PlayerScript : MonoBehaviour {
 	void FixedUpdate() {
 
 		//Store the current horizontal input in the float moveHorizontal.
-		float moveHorizontal = Input.GetAxis ("Horizontal");
+		moveHorizontal = Input.GetAxis ("Horizontal");
 
 		//Store the current vertical input in the float moveVertical.
-		float moveVertical = Input.GetAxis ("Vertical");
+		moveVertical = Input.GetAxis ("Vertical");
 
 		if (Input.GetMouseButtonDown(0) == true) {
 			Fire();
@@ -58,7 +60,7 @@ public class PlayerScript : MonoBehaviour {
 		// Create the Bullet
 		var bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
 
-		float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
+		float angle = AngleBetweenTwoPoints(mouseOnScreen, positionOnScreen);
 
 		//bullet.transform.rotation = Quaternion.Euler(new Vector3(0f,0f,angle));
 
@@ -66,7 +68,12 @@ public class PlayerScript : MonoBehaviour {
 
 		var rad = angle * Mathf.Deg2Rad;
 
-		bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
+		var speed = bullet.GetComponent<BulletScript>().speed;
+
+		//Vector2 movement = new Vector2(moveHorizontal * speed, moveVertical * speed);
+		Vector2 bulletMovement = new Vector2(Mathf.Cos(rad) * speed, Mathf.Sin(rad) * speed);
+
+		bullet.GetComponent<Rigidbody2D> ().velocity = bulletMovement;
 
 	}
 		
