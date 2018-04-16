@@ -25,12 +25,12 @@ public class Sound : MonoBehaviour {
     {
         if (PlayerPrefs.GetInt("mutestate", 0) == 0)
         {
-            AudioListener.volume = 1;
+            AudioListener.volume = 1; //music plays
         
         }
         else
         {
-            AudioListener.volume = 0;
+            AudioListener.volume = 0; //music stops
            
         }
     }

@@ -15,18 +15,25 @@ public class MenuTransitions : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             pausepanel.SetActive(true);
+            Time.timeScale = 0f; //this stops both the enemy and player from moving
         }
+    }
+
+    public void ResumeGameBtn()
+    {
+        pausepanel.SetActive(false);
+        Time.timeScale = 1f; //this unpauses and reenables enemy and player movement
     }
 
     //all buttons correspond to a specific scene within the game and serve to transition between those scenes
     public void PlayGameBtn()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1); 
     }
 
     public void SettingsGameBtn()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(2); 
     }
 
     public void MainMenu()

@@ -23,7 +23,8 @@ public class MusicInstantiator : MonoBehaviour
 
     public void Initializer()
     {
-        //sets player prefs which will be useful when controlling the audio
+        //sets player prefs which will be used when controlling the audio
+        //used to flag the toggle to whether or not music is already being played
         if (PlayerPrefs.GetInt("mutestate", 0) == 0) 
         {
             PlayerPrefs.SetInt("mutestate", 1);
