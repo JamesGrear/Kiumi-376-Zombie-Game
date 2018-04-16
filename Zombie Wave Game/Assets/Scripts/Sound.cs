@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Sound : MonoBehaviour {
 
     private MusicInstantiator song;
-    public Toggle MusicPauser; //set to the toggle gameobject within the settings
+    
 
     // Update is called once per frame
     void Start()
@@ -26,12 +26,12 @@ public class Sound : MonoBehaviour {
         if (PlayerPrefs.GetInt("mutestate", 0) == 0)
         {
             AudioListener.volume = 1;
-            MusicPauser.isOn = true;
+        
         }
         else
         {
             AudioListener.volume = 0;
-            MusicPauser.isOn = false;
+           
         }
     }
 }

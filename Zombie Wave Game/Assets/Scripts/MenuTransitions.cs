@@ -7,9 +7,19 @@ public class MenuTransitions : MonoBehaviour {
 
     //panel located within main menu that allows player to exit game
     public GameObject exitpanel;
+    public GameObject pausepanel;
+
+
+     void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            pausepanel.SetActive(true);
+        }
+    }
 
     //all buttons correspond to a specific scene within the game and serve to transition between those scenes
-    public void PlayGameBtn ()
+    public void PlayGameBtn()
     {
         SceneManager.LoadScene(1);
     }
@@ -23,7 +33,6 @@ public class MenuTransitions : MonoBehaviour {
     {
         SceneManager.LoadScene(0);
     }
-
 
     //This exits the game
     public void OnExitClick()
