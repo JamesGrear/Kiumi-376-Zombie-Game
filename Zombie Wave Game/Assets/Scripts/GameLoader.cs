@@ -25,6 +25,8 @@ public class GameLoader : MonoBehaviour {
        while(!operation.isDone) //runs as long as operation not done
        {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            Debug.Log(operation.progress);
+
             loadingbar.value = progress; //sets the loading bar slider value to the operations progress
 
 
