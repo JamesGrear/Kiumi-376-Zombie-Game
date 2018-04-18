@@ -7,6 +7,7 @@ public class ZombieScript : MonoBehaviour {
 
 
 	public float health = 100f;
+	public float damage = 100f;
 	public float speed = 2f;
 
 	public Tilemap walls;
@@ -20,6 +21,8 @@ public class ZombieScript : MonoBehaviour {
 	void Start () {
 
 		InvokeRepeating("CalculatePath", 0f, 0.1f);
+		InvokeRepeating ("TryAttackPlayer", 0f, 0.5f);
+
 		targetPlayer = GameObject.FindGameObjectWithTag ("Player");
 		walls = GameObject.FindGameObjectWithTag ("WallsTilemap").GetComponent<Tilemap>();
 		gameLogic = GameObject.FindObjectOfType<GameLogic> ();
@@ -65,31 +68,12 @@ public class ZombieScript : MonoBehaviour {
 			start = start + new Vector3 (0.5f, 0.5f);
 
 			transform.position = Vector3.MoveTowards (transform.position, start, step);
+
+			//Get the angle between the player and the next position
+			float angle = AngleBetweenTwoPoints(start, transform.position);
+
+			transform.rotation = Quaternion.Euler (new Vector3(0f,0f,angle-90));
 		}
-			
-		//Get the angle between the player and zombie
-		float angle = AngleBetweenTwoPoints(targetPlayer.transform.position, transform.position);
-
-		float dist = Vector3.Distance(targetPlayer.transform.position, transform.position);
-
-		if (dist < 1) {
-			animator.Play ("Zombie_Grabbing");
-		} else {
-			animator.Play ("Zombie_Walking");
-		}
-
-
-		transform.rotation = Quaternion.Euler (new Vector3(0f,0f,angle-90));
-
-		// debug code for pathfinding
-		/*if (path.Count <= 0) {
-			Debug.Log ("No path found.");
-		} else {
-			Debug.Log ("Path Found:");
-			for (int i = 0; i < path.Count; i++) {
-				Debug.Log (path [i].x + ", " + path[i].y);
-			}
-		}*/
 			
 	}
 
@@ -112,6 +96,22 @@ public class ZombieScript : MonoBehaviour {
 		// path will either be a list of Points (x, y), or an empty list if no path is found.
 		path = Pathfinding.FindPath(pathfindingGrid, from, to);
 
+	}
+
+	void TryAttackPlayer() {
+
+		if (health <= 0)
+			return;
+
+		float dist = Vector3.Distance(targetPlayer.transform.position, transform.position);
+
+		if (dist < 1) {
+			animator.Play ("Zombie_Grabbing");
+			targetPlayer.GetComponent<PlayerScript> ().TakeDamage (damage);
+		} else {
+			animator.Play ("Zombie_Walking");
+		}
+			
 	}
 
 	void OnDrawGizmos() {
