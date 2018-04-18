@@ -131,12 +131,13 @@ public class PlayerScript : MonoBehaviour {
 		if (health <= 0) {
 			animator.enabled = true;
 			animator.Play ("Player_Death");
-			Destroy (GetComponent<Rigidbody2D>());
+            Destroy (GetComponent<Rigidbody2D>());
 			Destroy (GetComponent<Collider2D> ());
 			GetComponent<SpriteRenderer> ().sortingLayerName = "Dead";
-			DestroyObject (gameObject, 0.83f);
-			gameLogic.GameOver ();
-		}
+            DestroyObject (gameObject, 0.83f);
+            gameLogic.GameOver();
+
+        }
 
 		healthSlider.value = CalculateHealthPercentage ();
 

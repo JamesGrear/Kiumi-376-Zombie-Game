@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour {
-
-	GameObject[] spawnPoints;
+    public GameObject retrypanel; //panel appears in loss of game
+    GameObject[] spawnPoints;
 	GameObject[] activeZombies;
 	public GameObject zombie;
 	public Text waveText;
@@ -50,11 +50,11 @@ public class GameLogic : MonoBehaviour {
 	}
 
 	public void GameOver() {
-		Invoke ("GameOverLogic", 3f);
+		Invoke ("GameOverLogic", 2f);
 	}
 
 	void GameOverLogic() {
-		
+        retrypanel.SetActive(true);
 	}
 
 

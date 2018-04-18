@@ -3,16 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuTransitions : MonoBehaviour {
+public class MenuTransitions : MonoBehaviour
+{
 
     //panel located within main menu that allows player to exit game
     public GameObject exitpanel;
+    public GameObject pausepanel;
+
+
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))//prompts panel to open if escape key is pressed
+        {
+
+            pausepanel.SetActive(true);
+            Time.timeScale = 0f; //this stops both the enemy and player from moving
+        }
+    }
+
+    public void ResumeGameBtn()
+    {
+    
+        pausepanel.SetActive(false);
+        Time.timeScale = 1f; //this unpauses and reenables enemy and player movement
+    }
 
     //all buttons correspond to a specific scene within the game and serve to transition between those scenes
-    public void PlayGameBtn ()
+    public void PlayGameBtn()
     {
+
         SceneManager.LoadScene(1);
     }
+
+
 
     public void SettingsGameBtn()
     {
@@ -21,6 +45,7 @@ public class MenuTransitions : MonoBehaviour {
 
     public void MainMenu()
     {
+       
         SceneManager.LoadScene(0);
     }
 
@@ -28,17 +53,20 @@ public class MenuTransitions : MonoBehaviour {
     //This exits the game
     public void OnExitClick()
     {
+      
         exitpanel.SetActive(true);
     }
 
     //When Buttons on panel appear....
     public void NoExit()
     {
+      
         exitpanel.SetActive(false); //makes panel dissapear
     }
 
     public void YesExit()
     {
+      
         Application.Quit();
     }
 
