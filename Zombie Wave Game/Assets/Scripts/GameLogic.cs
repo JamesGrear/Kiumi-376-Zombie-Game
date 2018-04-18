@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour {
 
 	GameObject[] spawnPoints;
 	GameObject[] activeZombies;
 	public GameObject zombie;
+	public Text waveText;
 	public int wave = 1;
 	public int zombiesLeft = 10;
 	public int maxZombies = 5;
@@ -22,6 +24,7 @@ public class GameLogic : MonoBehaviour {
 
 		if (zombiesLeft <= 0) {
 			wave++;
+			waveText.text = "Wave: " + wave;
 			zombiesLeft = Mathf.CeilToInt(Mathf.Sqrt (wave)) * 10;
 			maxZombies = 5 + wave;
 		}
@@ -37,6 +40,21 @@ public class GameLogic : MonoBehaviour {
 		if (activeZombies.Length < maxZombies) {
 			Instantiate (zombie, spawnPoint.gameObject.transform.position, Quaternion.identity);
 		}
+	}
+
+	public void NewGame() {
+		wave = 1;
+		zombiesLeft = 10;
+		maxZombies = 5;
+		waveText.text = "Wave: " + wave;
+	}
+
+	public void GameOver() {
+		Invoke ("GameOverLogic", 3f);
+	}
+
+	void GameOverLogic() {
+		
 	}
 
 

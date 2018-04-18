@@ -7,46 +7,23 @@ public class MenuTransitions : MonoBehaviour {
 
     //panel located within main menu that allows player to exit game
     public GameObject exitpanel;
-    public GameObject pausepanel;
-    public GameObject retrypanel;
-
-
-     void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            pausepanel.SetActive(true);
-            Time.timeScale = 0f; //this stops both the enemy and player from moving
-        }
-    }
-
-    public void ResumeGameBtn()
-    {
-        pausepanel.SetActive(false);
-        Time.timeScale = 1f; //this unpauses and reenables enemy and player movement
-    }
 
     //all buttons correspond to a specific scene within the game and serve to transition between those scenes
-    public void PlayGameBtn()
-    {
-        SceneManager.LoadScene(1); 
-    }
-
-    public void RetryGameBtn()
+    public void PlayGameBtn ()
     {
         SceneManager.LoadScene(1);
-        retrypanel.SetActive(false);
     }
 
     public void SettingsGameBtn()
     {
-        SceneManager.LoadScene(2); 
+        SceneManager.LoadScene(2);
     }
 
     public void MainMenu()
     {
         SceneManager.LoadScene(0);
     }
+
 
     //This exits the game
     public void OnExitClick()
