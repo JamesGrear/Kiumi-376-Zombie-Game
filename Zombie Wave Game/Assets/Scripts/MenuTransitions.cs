@@ -7,6 +7,7 @@ public class MenuTransitions : MonoBehaviour {
 
     //panel located within main menu that allows player to exit game
     public GameObject exitpanel;
+<<<<<<< HEAD
     public GameObject pausepanel;
     public GameObject retrypanel;
 
@@ -36,16 +37,24 @@ public class MenuTransitions : MonoBehaviour {
     }
 
     public void RetryGameBtn()
+=======
+
+    //all buttons correspond to a specific scene within the game and serve to transition between those scenes
+    public void PlayGameBtn ()
+>>>>>>> master
     {
         SoundFX.PlayFX("Button");
         SceneManager.LoadScene(1);
-        retrypanel.SetActive(false);
     }
 
     public void SettingsGameBtn()
     {
+<<<<<<< HEAD
         SoundFX.PlayFX("Button");
         SceneManager.LoadScene(2); 
+=======
+        SceneManager.LoadScene(2);
+>>>>>>> master
     }
 
     public void MainMenu()
@@ -53,6 +62,7 @@ public class MenuTransitions : MonoBehaviour {
         SoundFX.PlayFX("Button");
         SceneManager.LoadScene(0);
     }
+
 
     //This exits the game
     public void OnExitClick()
