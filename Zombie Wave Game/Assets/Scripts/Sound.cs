@@ -6,12 +6,16 @@ using UnityEngine.UI;
 public class Sound : MonoBehaviour {
 
     private MusicInstantiator song;
-    
+    public Button SoundButton;
+    public Button SoundFXButton;
+    public Sprite MusicOn;
+    public Sprite MusicOff;
 
     // Update is called once per frame
     void Start()
     {
         song = GameObject.FindObjectOfType<MusicInstantiator>();
+        PauseMusic();
     }
 
 
@@ -25,13 +29,16 @@ public class Sound : MonoBehaviour {
     {
         if (PlayerPrefs.GetInt("mutestate", 0) == 0)
         {
+            SoundFX.PlayFX("AudioTick");
             AudioListener.volume = 1; //music plays
+            SoundButton.GetComponent<Image>().sprite = MusicOn;
         
         }
         else
         {
+            SoundFX.PlayFX("AudioTick");
             AudioListener.volume = 0; //music stops
-           
+            SoundButton.GetComponent<Image>().sprite = MusicOff;
         }
     }
 }

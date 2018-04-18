@@ -15,6 +15,7 @@ public class MenuTransitions : MonoBehaviour {
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
+            SoundFX.PlayFX("Button");
             pausepanel.SetActive(true);
             Time.timeScale = 0f; //this stops both the enemy and player from moving
         }
@@ -22,6 +23,7 @@ public class MenuTransitions : MonoBehaviour {
 
     public void ResumeGameBtn()
     {
+        SoundFX.PlayFX("Button");
         pausepanel.SetActive(false);
         Time.timeScale = 1f; //this unpauses and reenables enemy and player movement
     }
@@ -29,39 +31,46 @@ public class MenuTransitions : MonoBehaviour {
     //all buttons correspond to a specific scene within the game and serve to transition between those scenes
     public void PlayGameBtn()
     {
+        SoundFX.PlayFX("Button");
         SceneManager.LoadScene(1); 
     }
 
     public void RetryGameBtn()
     {
+        SoundFX.PlayFX("Button");
         SceneManager.LoadScene(1);
         retrypanel.SetActive(false);
     }
 
     public void SettingsGameBtn()
     {
+        SoundFX.PlayFX("Button");
         SceneManager.LoadScene(2); 
     }
 
     public void MainMenu()
     {
+        SoundFX.PlayFX("Button");
         SceneManager.LoadScene(0);
     }
 
     //This exits the game
     public void OnExitClick()
     {
+        SoundFX.PlayFX("Button");
         exitpanel.SetActive(true);
     }
 
     //When Buttons on panel appear....
     public void NoExit()
     {
+        SoundFX.PlayFX("Button");
         exitpanel.SetActive(false); //makes panel dissapear
     }
 
     public void YesExit()
     {
+        SoundFX.PlayFX("Button");
         Application.Quit();
     }
 
