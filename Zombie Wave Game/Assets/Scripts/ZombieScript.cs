@@ -45,6 +45,7 @@ public class ZombieScript : MonoBehaviour {
 						wallsArray[x,y] = false;
 					}
 				} else {
+					wallsArray [x, y] = true;
 					//Debug.Log("x:" + x + " y:" + y + " tile: (null)");
 				}
 			}
